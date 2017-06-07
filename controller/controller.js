@@ -9,6 +9,7 @@ var Schema =  mongoose.Schema;
 
 var quantitySchema = new Schema({
     quantity: Number,
+    quantityCow: Number,
     date: { type: String, unique: true }
 });
 

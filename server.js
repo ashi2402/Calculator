@@ -35,6 +35,7 @@ myRouter.get('/multiple', function (req, res) {
 myRouter.post('/save', function (req, res) {
     var newData = new quantity({
         quantity: req.body.quantity,
+        quantityCow: req.body.quantityCow,
         date: req.body.date
     });
     newData.save(function (err) {
@@ -48,7 +49,12 @@ myRouter.post('/save', function (req, res) {
             // res.send("Data Saved")
         }
         else {
-            res.send({success: false});
+            res.contentType('Conent-Type', "application/json");
+            res.send(JSON.stringify({
+                success: false,
+                data: "This date already exist"
+            }));
+
         }
     })
 });

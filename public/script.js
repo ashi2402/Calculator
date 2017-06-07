@@ -34,7 +34,7 @@
 var app = angular.module('firstApplication', ['ngMaterial']);
 
 app.controller('sampleController', function ($scope) {
-    $scope.title = "Calculator";
+    $scope.title = "Monthly milk calculation";
     $scope.detail = ""
     $scope.showLeftSidenav = false;
     $scope.toggleLeftSidenav = function(){
@@ -51,29 +51,40 @@ app.controller('listController', function ($scope, $http, $window) {
         console.log(response);
         $scope.details = response.data;
 
-        $scope.getTotal = function(){
+        $scope.TotalBuffalo = function(){
             var total = 0;
             for(var i = 0; i < $scope.details.length; i++){
                 var product = $scope.details[i];
                 total += product.quantity;
+                // totalCow += product.quantityCow;
             }
             return total;
+        };
+
+        $scope.TotalCow = function () {
+            var totalCow = 0;
+            for (var i = 0; i < $scope.details.length; i++) {
+                var product = $scope.details[i];
+                totalCow += product.quantityCow;
+            }
+            return totalCow;
         }
     });
 
 
     $scope.save = function () {
-        var dataObj = {quantity: $scope.quantity, date: $scope.myDate};
+        var dataObj = {quantity: $scope.quantity, quantityCow: $scope.quantityCow, date: $scope.myDate};
         var dataSave = $http.post('/save', dataObj);
         dataSave.success(function (data, status, headers, config) {
             $scope.message = data;
-            // alert(data);
+            alert(data);
         });
         dataSave.error(function (data, status, headers, config) {
-            alert("error");
+            alert(data);
         });
 
         $scope.quantity = "";
+        $scope.quantityCow = "";
         $scope.myDate = "";
         $window.location.reload()
         // $route.reload();

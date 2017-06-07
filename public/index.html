@@ -138,18 +138,20 @@
     </md-toolbar>
 </md-sidenav>
 <md-content  layout-padding ng-cloak >
-    <form novalidate ng-submit="save()">
+    <form novalidate ng-submit="save()" style="border: 1px solid black; margin-bottom: 10px; width: 18%" >
         <div class="form-group">
-            <label for="quantity">Quantity</label>
-            <input class="form-control input-xs" id="quantity"  ng-model="quantity" type="number" required="required">
+            <label for="quantity">Quantity buffalo</label>
+            <input class="form-control input-xs" id="quantity"  min="0" ng-model="quantity" type="number" required="required">
+        </div><br>
+        <div class="form-group">
+            <label for="quantityCow">Quantity cow  </label>
+            <input class="form-control input-xs" id="quantityCow" min="0"  ng-model="quantityCow" type="number" required="required">
         </div>
         <div class="form-group">
             <label>Select Date</label>
                 <md-datepicker id="date" ng-model="myDate" md-placeholder="Enter date"></md-datepicker>
         </div>
-
         <button class="btn btn-primary">Add</button>
-
     </form>
 
 
@@ -158,20 +160,23 @@
         <tr>
             <th>Index</th>
             <th>Date</th>
-            <th>Quantity</th>
+            <th>Buffalo (55)</th>
+            <th>Cow (40)</th>
         </tr>
         <tr ng-repeat="data in details">
             <td>{{$index +1}}</td>
             <td>{{data.date | date: 'dd-MM-yyyy'}}</td>
             <td>{{data.quantity}}</td>
+            <td>{{data.quantityCow}}</td>
         </tr>
         <tr>
-            <td colspan="2"><strong>Total Quantity :</strong></td>
-            <td>{{ getTotal() }}</td>
+            <td colspan="2"><strong>Total Quantity : {{TotalBuffalo() + TotalCow()}}</strong></td>
+            <td>{{ TotalBuffalo() }}</td>
+            <td>{{ TotalCow() }}</td>
         </tr>
         <tr>
             <td colspan="2"><strong>Total Amount :</strong></td>
-            <td>Rs. {{ (getTotal())*55 }}</td>
+            <td colspan="2">Rs. {{ ((TotalBuffalo())*55)+((TotalCow()*40))}}</td>
         </tr>
         </tbody>
     </table>
